@@ -17,7 +17,7 @@ public class MainView extends VerticalLayout {
     @Autowired
     public MainView(EmployeeDao dao) {
         this.dao = dao;
-        grid = new Grid<>();
+        grid = new Grid<>(Employee.class);
 
         add(grid);
 
