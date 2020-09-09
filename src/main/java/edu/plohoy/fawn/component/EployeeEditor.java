@@ -1,7 +1,44 @@
 package edu.plohoy.fawn.component;
 
 import com.vaadin.flow.component.KeyNotifier;
+import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.icon.VaadinIcon;
+import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
+import com.vaadin.flow.component.textfield.TextField;
+import com.vaadin.flow.data.binder.Binder;
+import com.vaadin.flow.spring.annotation.SpringComponent;
+import com.vaadin.flow.spring.annotation.UIScope;
+import edu.plohoy.fawn.dao.EmployeeDao;
+import edu.plohoy.fawn.domain.Employee;
+import org.springframework.beans.factory.annotation.Autowired;
 
+import java.awt.*;
+
+@SpringComponent
+@UIScope
 public class EployeeEditor extends VerticalLayout implements KeyNotifier {
+    private final EmployeeDao dao;
+    private Employee employee;
+
+    private TextField firstName = new TextField("First Name");
+    private TextField lastName = new TextField("Last Name");
+    private TextField patronymic = new TextField("Patronymic");
+
+    private Button save = new Button("Save", VaadinIcon.CHECK.create());
+    private Button cancel = new Button("Cancel");
+    private Button delete = new Button("Delete", VaadinIcon.TRASH.create());
+    private HorizontalLayout actions = new HorizontalLayout(save, cancel, delete);
+
+    private Binder<Employee> binnder = new Binder<>(Employee.class);
+    private ChangeHandler changeHandler;
+
+    public interface ChangeHandler {
+        void onChange();
+    }
+
+    @Autowired
+    public EployeeEditor(EmployeeDao dao) {
+        this.dao = dao;
+    }
 }
