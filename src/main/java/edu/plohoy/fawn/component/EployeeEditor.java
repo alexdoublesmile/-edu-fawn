@@ -1,5 +1,6 @@
 package edu.plohoy.fawn.component;
 
+import com.vaadin.flow.component.Key;
 import com.vaadin.flow.component.KeyNotifier;
 import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.icon.VaadinIcon;
@@ -40,5 +41,36 @@ public class EployeeEditor extends VerticalLayout implements KeyNotifier {
     @Autowired
     public EployeeEditor(EmployeeDao dao) {
         this.dao = dao;
+
+        add(firstName, lastName, patronymic, actions);
+
+        binnder.bindInstanceFields(this);
+
+        setSpacing(true);
+
+        save.getElement().getThemeList().add("primary");
+        delete.getElement().getThemeList().add("error");
+
+        addKeyPressListener(Key.ENTER, e -> save());
+
+        save.addClickListener(e -> save());
+        delete.addClickListener(e -> delete());
+        cancel.addClickListener(e -> editEmployee(employee));
+
+        setVisible(false);
+    }
+
+    private void editEmployee(Employee employee) {
+        
+    }
+
+    private void delete() {
+        dao.delete(employee);
+        changeHandler.onChange();
+    }
+
+    private void save() {
+        dao.save(employee);
+        changeHandler.onChange();
     }
 }
