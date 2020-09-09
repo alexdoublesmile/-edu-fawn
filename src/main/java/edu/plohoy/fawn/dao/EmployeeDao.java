@@ -12,5 +12,5 @@ public interface EmployeeDao extends JpaRepository<Employee, Long> {
     @Query("from Employee e " +
             "where concat(e.lastName, ' ', e.firstName, ' ', e.patronymic) " +
             "like concat('%', :name, '%')")
-    List<Employee> getByName(@Param("name") String name);
+    List<Employee> findByName(@Param("name") String name);
 }
