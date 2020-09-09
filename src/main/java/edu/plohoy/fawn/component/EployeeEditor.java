@@ -12,6 +12,7 @@ import com.vaadin.flow.spring.annotation.SpringComponent;
 import com.vaadin.flow.spring.annotation.UIScope;
 import edu.plohoy.fawn.dao.EmployeeDao;
 import edu.plohoy.fawn.domain.Employee;
+import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.awt.*;
@@ -34,6 +35,7 @@ public class EployeeEditor extends VerticalLayout implements KeyNotifier {
     private Binder<Employee> binnder = new Binder<>(Employee.class);
     private ChangeHandler changeHandler;
 
+    @Setter
     public interface ChangeHandler {
         void onChange();
     }
@@ -61,7 +63,7 @@ public class EployeeEditor extends VerticalLayout implements KeyNotifier {
     }
 
     private void editEmployee(Employee employee) {
-        
+
     }
 
     private void delete() {
