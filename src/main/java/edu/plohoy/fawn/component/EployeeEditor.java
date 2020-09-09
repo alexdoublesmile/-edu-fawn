@@ -15,8 +15,6 @@ import edu.plohoy.fawn.domain.Employee;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.awt.*;
-
 @SpringComponent
 @UIScope
 public class EployeeEditor extends VerticalLayout implements KeyNotifier {
@@ -32,7 +30,7 @@ public class EployeeEditor extends VerticalLayout implements KeyNotifier {
     private Button delete = new Button("Delete", VaadinIcon.TRASH.create());
     private HorizontalLayout actions = new HorizontalLayout(save, cancel, delete);
 
-    private Binder<Employee> binnder = new Binder<>(Employee.class);
+    private Binder<Employee> binder = new Binder<>(Employee.class);
 
     @Setter
     private ChangeHandler changeHandler;
@@ -47,7 +45,7 @@ public class EployeeEditor extends VerticalLayout implements KeyNotifier {
 
         add(firstName, lastName, patronymic, actions);
 
-        binnder.bindInstanceFields(this);
+        binder.bindInstanceFields(this);
 
         setSpacing(true);
 
@@ -63,8 +61,24 @@ public class EployeeEditor extends VerticalLayout implements KeyNotifier {
         setVisible(false);
     }
 
-    private void editEmployee(Employee employee) {
+    private void editEmployee(Employee newEmp) {
+        if (newEmp == null) {
+            setVisible(false);
+            return;
+        }
 
+        if (newEmp.getId() != null) {
+            employee = dao.findById(newEmp.getId())
+                    .orElse(newEmp);
+        } else {
+            employee = newEmp;
+        }
+
+        binder.setBean(employee);
+
+        setVisible(true);
+
+        lastName.focus();
     }
 
     private void delete() {
