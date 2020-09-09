@@ -1,5 +1,5 @@
-insert into fawn(id, first_name, last_name, patronymic) values
-  (1, 'Ivan', 'Ivanovich', 'Ivanov'),
-  (2, 'Peter', 'Petrovich', 'Petrov'),
-  (3, 'Sidor', 'Sidorovich', 'Sidoroov'),
-  (4, 'Alex', 'Smith', '<none>');
+insert into fawn (id, last_name, first_name, patronymic) values
+  (1, 'Ivanovich', 'Ivan', 'Ivanov'),
+  (2, 'Petrovich', 'Peter', 'Petrov'),
+  (3, 'Sidorovich', 'Sidor', 'Sidoroov'),
+  (4, 'Smith', 'Alex', '<none>');
