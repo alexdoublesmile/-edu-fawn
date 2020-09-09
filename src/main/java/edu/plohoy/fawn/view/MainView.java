@@ -12,11 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class MainView extends VerticalLayout {
 
     private final EmployeeDao dao;
-    private Grid<Employee> grid = new Grid<>();
+    private Grid<Employee> grid;
 
     @Autowired
     public MainView(EmployeeDao dao) {
         this.dao = dao;
+        grid = new Grid<>();
 
         add(grid);
 
