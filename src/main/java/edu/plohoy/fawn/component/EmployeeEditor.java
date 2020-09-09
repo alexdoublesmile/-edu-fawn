@@ -17,7 +17,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 @SpringComponent
 @UIScope
-public class EployeeEditor extends VerticalLayout implements KeyNotifier {
+public class EmployeeEditor extends VerticalLayout implements KeyNotifier {
     private final EmployeeDao dao;
     private Employee employee;
 
@@ -40,7 +40,7 @@ public class EployeeEditor extends VerticalLayout implements KeyNotifier {
     }
 
     @Autowired
-    public EployeeEditor(EmployeeDao dao) {
+    public EmployeeEditor(EmployeeDao dao) {
         this.dao = dao;
 
         add(firstName, lastName, patronymic, actions);
