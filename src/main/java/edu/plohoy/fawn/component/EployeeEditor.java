@@ -33,9 +33,10 @@ public class EployeeEditor extends VerticalLayout implements KeyNotifier {
     private HorizontalLayout actions = new HorizontalLayout(save, cancel, delete);
 
     private Binder<Employee> binnder = new Binder<>(Employee.class);
-    private ChangeHandler changeHandler;
 
     @Setter
+    private ChangeHandler changeHandler;
+
     public interface ChangeHandler {
         void onChange();
     }
