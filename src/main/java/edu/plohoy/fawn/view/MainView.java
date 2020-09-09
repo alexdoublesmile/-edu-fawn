@@ -7,6 +7,7 @@ import com.vaadin.flow.router.Route;
 import edu.plohoy.fawn.dao.EmployeeDao;
 import edu.plohoy.fawn.domain.Employee;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.util.StringUtils;
 
 @Route
 public class MainView extends VerticalLayout {
@@ -21,6 +22,14 @@ public class MainView extends VerticalLayout {
 
         add(grid);
 
-        grid.setItems(dao.findAll());
+        showEmployee("");
+    }
+
+    private void showEmployee(String name) {
+        if (StringUtils.isEmpty(name)) {
+            grid.setItems(dao.findAll());
+        } else {
+            grid.setItems(dao.findByName(name));
+        }
     }
 }
